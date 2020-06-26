@@ -20,7 +20,6 @@ def create_parser():
 if __name__ == "__main__":
     args = create_parser()
 
-
     INPUT_VIDEO_FILE_NAME = args.input[0]
     DATA_FILE_NAME = args.data[0]
     OUTPUT_VIDEO_FILE_NAME = args.output[0]
