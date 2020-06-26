@@ -14,31 +14,32 @@ def create_parser():
     args = parser.parse_args()
     return args
 
-args = create_parser()
+if __name__ == "__main__":
+    args = create_parser()
 
-INPUT_VIDEO_FILE_NAME = args.input[0]
-DATA_FILE_NAME = args.data[0]
-OUTPUT_VIDEO_FILE_NAME = args.output[0]
-STEP_SIZE = 1 / args.freq
-START_TIME = 0
-FILE_NAME_SUBTITLE = args.subtitle + '.ass'
+    INPUT_VIDEO_FILE_NAME = args.input[0]
+    DATA_FILE_NAME = args.data[0]
+    OUTPUT_VIDEO_FILE_NAME = args.output[0]
+    STEP_SIZE = 1 / args.freq
+    START_TIME = 0
+    FILE_NAME_SUBTITLE = args.subtitle
 
-duration = dir_command.get_duration_video_in_seconds(INPUT_VIDEO_FILE_NAME)
+    duration = dir_command.get_duration_video_in_seconds(INPUT_VIDEO_FILE_NAME)
 
-title = work_with_csv.get_title_from_csv(DATA_FILE_NAME)
-data_gen = work_with_csv.get_data_from_csv(DATA_FILE_NAME)
+    title = work_with_csv.get_title_from_csv(DATA_FILE_NAME)
+    data_gen = work_with_csv.get_data_from_csv(DATA_FILE_NAME)
 
 
-# Creating a subtitle file
-subtitle_preparation.create_subtitle_file(duration=duration, title=title, data_gen=data_gen,
-                                            file_name_subtitle=FILE_NAME_SUBTITLE, 
-                                            start_time=START_TIME, 
-                                            step_size=STEP_SIZE)
+    # Creating a subtitle file
+    subtitle_preparation.create_subtitle_file(duration=duration, title=title, data_gen=data_gen,
+                                                file_name_subtitle=FILE_NAME_SUBTITLE, 
+                                                start_time=START_TIME, 
+                                                step_size=STEP_SIZE)
 
-# Video captioning
-dir_command.overlay_sub_to_video(input_video_file_name=INPUT_VIDEO_FILE_NAME, 
-                                    output_video_file_name=OUTPUT_VIDEO_FILE_NAME, 
-                                    file_name_subtitle=FILE_NAME_SUBTITLE)
+    # Video captioning
+    dir_command.overlay_sub_to_video(input_video_file_name=INPUT_VIDEO_FILE_NAME, 
+                                        output_video_file_name=OUTPUT_VIDEO_FILE_NAME, 
+                                        file_name_subtitle=FILE_NAME_SUBTITLE)
 
 
 
