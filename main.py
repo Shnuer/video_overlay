@@ -20,30 +20,31 @@ def create_parser():
 if __name__ == "__main__":
     args = create_parser()
 
-    INPUT_VIDEO_FILE_NAME = args.input[0]
-    DATA_FILE_NAME = args.data[0]
-    OUTPUT_VIDEO_FILE_NAME = args.output[0]
-    STEP_SIZE = 1 / args.freq
     START_TIME = 0
-    FILE_NAME_SUBTITLE = args.subtitle
+
+    input_video_file_name = args.input[0]
+    data_file_name = args.data[0]
+    output_video_file_name = args.output[0]
+    step_size = 1 / args.freq
+    file_name_subtitle = args.subtitle
 
 
-    duration = dir_command.get_duration_video_in_seconds(INPUT_VIDEO_FILE_NAME)
+    duration = dir_command.get_duration_video_in_seconds(input_video_file_name)
 
-    title = work_with_csv.get_title_from_csv(DATA_FILE_NAME)
-    data_gen = work_with_csv.get_data_from_csv(DATA_FILE_NAME)
+    title = work_with_csv.get_title_from_csv(data_file_name)
+    data_gen = work_with_csv.get_data_from_csv(data_file_name)
 
 
     # Creating a subtitle file
     subtitle_preparation.create_subtitle_file(duration=duration, title=title, data_gen=data_gen,
-                                                file_name_subtitle=FILE_NAME_SUBTITLE, 
+                                                file_name_subtitle=file_name_subtitle, 
                                                 start_time=START_TIME, 
-                                                step_size=STEP_SIZE)
+                                                step_size=step_size)
 
     # Video captioning
-    dir_command.overlay_sub_to_video(input_video_file_name=INPUT_VIDEO_FILE_NAME, 
-                                        output_video_file_name=OUTPUT_VIDEO_FILE_NAME, 
-                                        file_name_subtitle=FILE_NAME_SUBTITLE)
+    dir_command.overlay_sub_to_video(input_video_file_name=input_video_file_name, 
+                                        output_video_file_name=output_video_file_name, 
+                                        file_name_subtitle=file_name_subtitle)
 
 
 
