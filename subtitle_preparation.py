@@ -3,11 +3,11 @@ import numpy
 from tqdm import tqdm
 from sys import stdout
 
-FILE_NAME_SUBTITLE = 'file.ass'
 
 def get_info_script():
     return ''
 
+# Display Text Configuration
 def get_config_ass_format():
     style_config = {
         'Name':'DefaultVCD',
@@ -47,6 +47,7 @@ def get_config_ass_format():
 
     return style_setting
 
+# Converts ISO time format to ass file time format
 def get_ass_format_time(time):
     time = float(time)
     ass_format_time = str(datetime.timedelta(seconds=time))
@@ -68,6 +69,7 @@ def get_display_string_data_format_ass(title, data):
     base_string = f'{title}: {data}\\N '
     return base_string
 
+# Creates a basic subtitle file structure
 def create_file_filing():
     info_str = '[Script Info]\n'
     info_str =  info_str + get_info_script() +'\n'
@@ -81,8 +83,9 @@ def create_file_filing():
 
     return final_string
 
-def create_subtitle_file(duration, title, data_gen, file_name_subtitle='subtitle.ass', start_time=0, step_size=0.02):
 
+# Creating a subtitle file based on data with a given frequency
+def create_subtitle_file(duration, title, data_gen, file_name_subtitle='subtitle.ass', start_time=0, step_size=0.02):
 
     with open(file_name_subtitle,'w',encoding='utf_8_sig') as f:
 
