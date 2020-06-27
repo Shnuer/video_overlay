@@ -1,17 +1,21 @@
 import subprocess
 import os
+#!/usr/bin/env python3
 
 def get_absolute_file_path(file_name):
+    print(file_name)
     return os.path.normpath(f'{os.getcwd()}/{file_name}')
 
 
 def execute_ffprobe(cmd):
-    proc = subprocess.Popen(cmd, stdout=subprocess.PIPE)
+    print(cmd)
+    proc = subprocess.Popen(cmd, stdout=subprocess.PIPE, shell=True)
     output = proc.communicate()
     return eval(output[0])
 
 def execute_ffmpeg(cmd):
-    subprocess.run(cmd)
+    subprocess.run(cmd, shell=True)
+
 
 def get_video_file_duration(file_name):
     return execute_ffprobe(f"ffprobe -v error "
